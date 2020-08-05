@@ -4,13 +4,13 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-const char* mqtt_server = "172.40.0.3";
+const char* mqtt_server = "***.***.***.***"; // IP ADDRESS BROKER MQTT
 byte mac[]    = {  0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xEA };
 String _topic;
 String _payload;
-const int switch1 = 3;
-const int switch2 = 4;
-const int sensorTemperatura = 2;
+const int switch1 = 3; // SWITCH 1 ON ARDUINO PIN 3
+const int switch2 = 4; // SWITCH 2 ON ARDUINO PIN 4
+const int sensorTemperatura = 2; // DS18B20 SENSOR ON ARDUINO PIN 2, MAKE SURE TO PULL UP WITH A 4.7K RESISTOR
 
 OneWire oneWire(sensorTemperatura);
 DallasTemperature sensors(&oneWire);
@@ -64,7 +64,7 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect("arduinoClient")) {
+    if (client.connect("arduinoClient","***USERNAME***","***PASSWORD***")) { // ON THIS FUNCTION IF YOU HAVE MQTT USERNAME AND PASSWORD, PUT THE USERNAME IN SECOND PARAMETER AND PASSWORD IN THIRD PARAMETER
       Serial.println("connected");
       // Once connected, publish an announcement...
       //client.publish("openhab","himitsu sensor, reporting in");
